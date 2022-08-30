@@ -1,6 +1,5 @@
 package com.example.githubusers.repository
 
-import com.example.githubusers.model.GitUsers
 import com.example.githubusers.model.UserDto
 import io.reactivex.rxjava3.core.Single
 

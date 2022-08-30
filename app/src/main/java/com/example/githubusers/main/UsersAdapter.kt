@@ -17,8 +17,10 @@ class UsersAdapter(
             notifyDataSetChanged()
         }
 
-    inner class UsersHolderView(val binding: ItemListRvBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class UsersHolderView(
+        private val binding: ItemListRvBinding,
+        private val onItemClick: OnItemClick,
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: UserDto) = with(binding) {
             tvUsers.text = item.login
             ImageUsers.loadImage(item.avatar_url)
@@ -33,14 +35,13 @@ class UsersAdapter(
         val binding = ItemListRvBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-        return UsersHolderView(binding)
+        return UsersHolderView(binding, onItemClick)
     }
 
     override fun onBindViewHolder(holder: UsersHolderView, position: Int) {
         holder.bind(user[position])
     }
 
-    override fun getItemCount(): Int {
-        return user.size
-    }
+    override fun getItemCount(): Int = user.size
+
 }
