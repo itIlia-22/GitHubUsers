@@ -13,6 +13,7 @@ import com.example.githubusers.model.UserDto
 import com.example.githubusers.repository.OnItemClick
 import com.example.githubusers.repository.UsersGitRepositoryImpl
 import com.example.githubusers.repository.network.Network
+import com.example.githubusers.users.UsersDetailsPresenter
 import com.example.githubusers.users.UsersPresenter
 import com.example.githubusers.users.UsersView
 import com.example.githubusers.utils.makeGone
@@ -23,7 +24,7 @@ import moxy.ktx.moxyPresenter
 
 class UserListFragment : MvpAppCompatFragment(),UsersView,OnBackPressendListener {
 
-    private val presenter:UsersPresenter by moxyPresenter {
+    private val presenter: UsersPresenter by moxyPresenter {
         UsersPresenter(UsersGitRepositoryImpl(Network.usersApi),MyApp.instance.router)
     }
 

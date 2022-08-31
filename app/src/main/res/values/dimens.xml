@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="size">10sp</dimen>
+    <dimen name="Users">200dp</dimen>
+
+</resources>

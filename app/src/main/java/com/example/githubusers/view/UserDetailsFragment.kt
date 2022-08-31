@@ -21,7 +21,7 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
 
-class UserInfoFragment : MvpAppCompatFragment(), UsersInfoView, OnBackPressendListener {
+class UserDetailsFragment : MvpAppCompatFragment(), UsersInfoView, OnBackPressendListener {
     private val presenter: UsersInfoPresenter by moxyPresenter {
         UsersInfoPresenter(UsersGitRepositoryImpl(Network.usersApi), MyApp.instance.router)
     }
@@ -51,8 +51,8 @@ class UserInfoFragment : MvpAppCompatFragment(), UsersInfoView, OnBackPressendLi
 
         private const val ARG_LOGIN = "ARG_LOGIN"
 
-        fun getInstance(Info: String): UserInfoFragment {
-            return UserInfoFragment().apply {
+        fun getInstance(Info: String): UserDetailsFragment {
+            return UserDetailsFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_LOGIN, Info)
                 }

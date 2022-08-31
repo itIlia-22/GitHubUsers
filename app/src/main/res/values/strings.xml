@@ -7,4 +7,6 @@
     <string name="repo">Repo</string>
     <string name="sub">Sub</string>
     <string name="org">Org</string>
+    <string name="subscriptions">Subscriptions:</string>
+    <string name="organizations">Organizations:</string>
 </resources>
