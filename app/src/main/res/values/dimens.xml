@@ -2,5 +2,6 @@
 <resources>
     <dimen name="size">10sp</dimen>
     <dimen name="Users">200dp</dimen>
+    <dimen name="f">50dp</dimen>
 
 </resources>

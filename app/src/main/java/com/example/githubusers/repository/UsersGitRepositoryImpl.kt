@@ -2,6 +2,7 @@ package com.example.githubusers.repository
 
 import com.example.githubusers.mapper.UserMapper
 import com.example.githubusers.model.UserDto
+import com.example.githubusers.oreg.OregDto
 import io.reactivex.rxjava3.core.Single
 
 class UsersGitRepositoryImpl constructor(
@@ -35,6 +36,13 @@ class UsersGitRepositoryImpl constructor(
        return usersApi.getOrganizationsUsers(organizations)
            .map(UserMapper::mapToEntity)
     }
+
+    override fun getOrgs(orgs: String): Single<OregDto> {
+        return usersApi.getInfoOrg(orgs)
+            .map(UserMapper::mapToEntity)
+    }
+
+
 
 
 }

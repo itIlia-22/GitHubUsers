@@ -1,14 +1,12 @@
-package com.example.githubusers.users
+package com.example.githubusers.usersdetails
 
-import android.util.Log
 import com.example.githubusers.repository.GitUsersRepository
-import com.example.githubusers.repository.UsersGitRepositoryImpl
 import com.example.githubusers.screens.UserScreen
-import com.example.githubusers.usersdetails.UsersDetailsView
+import com.example.githubusers.utils.disposeBy
+import com.example.githubusers.utils.subscribeByDefault
 import com.github.terrakok.cicerone.Router
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
-import java.util.concurrent.TimeUnit
 
 class UsersDetailsPresenter(
     val repo: GitUsersRepository,
@@ -17,26 +15,28 @@ class UsersDetailsPresenter(
 
     ) : MvpPresenter<UsersDetailsView>() {
 
-    override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
-        viewState.showLoading()
-                repo.getUser()
-            .delay(1000L, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                //viewState.initList(it)
-                viewState.hideLoading()
-            }, {
-                Log.e("1", it.toString())
-            })
-    }
+    private val bag = CompositeDisposable()
 
-    fun openDetailsFragment(details: String) {
-        router.navigateTo(UserScreen.UserDetailsInfo(details))
+    fun forkUser(repoUrl: String) {
+        viewState.showLoading()
+        repo.getOrgs(repoUrl)
+            .subscribeByDefault()
+            .subscribe(
+                {
+                    viewState.show(it)
+                    viewState.hideLoading()
+                },
+                {}
+            ).disposeBy(bag)
     }
 
     fun onBackPressed(): Boolean {
-        router.replaceScreen(UserScreen)
+        router.backTo(UserScreen)
         return true
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        bag.dispose()
     }
 }

@@ -1,7 +1,5 @@
 package com.example.githubusers.view
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +23,18 @@ class UserInfoFragment : MvpAppCompatFragment(), UsersInfoView, OnBackPressendLi
     private val presenter: UsersInfoPresenter by moxyPresenter {
         UsersInfoPresenter(UsersGitRepositoryImpl(Network.usersApi), MyApp.instance.router)
     }
-    private lateinit var banding: FragmentUserInfoBinding
+
+
+    private  var _binding: FragmentUserInfoBinding? = null
+    private  val binding:FragmentUserInfoBinding
+
+    get() {
+        return _binding!!
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,13 +46,12 @@ class UserInfoFragment : MvpAppCompatFragment(), UsersInfoView, OnBackPressendLi
     }
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         return FragmentUserInfoBinding.inflate(inflater, container, false).also {
-            banding = it
+            _binding = it
         }.root
     }
 
@@ -58,7 +66,12 @@ class UserInfoFragment : MvpAppCompatFragment(), UsersInfoView, OnBackPressendLi
                 }
             }
         }
+
+
+
     }
+
+
 
 /*
 private fun InfoUsers()= with(banding){
@@ -74,7 +87,7 @@ private fun InfoUsers()= with(banding){
 
 
     override fun showLoading() {
-        banding.apply {
+        binding.apply {
             imageInfoUser.makeGone()
             loginInfoUser.makeGone()
             InfoRepo.makeGone()
@@ -85,7 +98,7 @@ private fun InfoUsers()= with(banding){
     }
 
     override fun hideLoading() {
-        banding.apply {
+        binding.apply {
             imageInfoUser.makeVisible()
             loginInfoUser.makeVisible()
             InfoRepo.makeVisible()
@@ -96,16 +109,32 @@ private fun InfoUsers()= with(banding){
     }
 
     override fun show(user: UserDto) {
-        banding.apply {
+        binding.apply {
             imageInfoUser.loadImage(user.avatar_url)
             loginInfoUser.text = user.login
             InfoRepo.text = user.repos_url
+            InfoRepo.setOnClickListener {
+                presenter.openForksFragment(user.repos_url)
+
+            }
             InfoSub.text = user.subscriptions_url
+            InfoSub.setOnClickListener {
+                presenter.openForksFragment(user.subscriptions_url)
+
+            }
             InfoOrg.text = user.organizations_url
+            InfoOrg.setOnClickListener{
+                presenter.openForksFragment(user.organizations_url)
+            }
         }
+
     }
 
 
 
+
+
     override fun onBackPressend() = presenter.onBackPressed()
+
+
 }

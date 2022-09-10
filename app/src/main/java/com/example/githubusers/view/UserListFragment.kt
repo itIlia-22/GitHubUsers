@@ -8,12 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubusers.MyApp
 import com.example.githubusers.OnBackPressendListener
 import com.example.githubusers.databinding.FragmentUserListBinding
-import com.example.githubusers.main.UsersAdapter
+import com.example.githubusers.users.UsersAdapter
 import com.example.githubusers.model.UserDto
 import com.example.githubusers.repository.OnItemClick
 import com.example.githubusers.repository.UsersGitRepositoryImpl
 import com.example.githubusers.repository.network.Network
-import com.example.githubusers.users.UsersDetailsPresenter
 import com.example.githubusers.users.UsersPresenter
 import com.example.githubusers.users.UsersView
 import com.example.githubusers.utils.makeGone

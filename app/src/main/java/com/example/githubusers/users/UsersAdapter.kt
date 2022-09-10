@@ -1,4 +1,4 @@
-package com.example.githubusers.main
+package com.example.githubusers.users
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

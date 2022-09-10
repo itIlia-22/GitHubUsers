@@ -1,6 +1,6 @@
 package com.example.githubusers.usersdetails
 
-import com.example.githubusers.model.UserDto
+import com.example.githubusers.oreg.OregDto
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
@@ -9,5 +9,6 @@ import moxy.viewstate.strategy.StateStrategyType
 interface UsersDetailsView:MvpView {
     fun showLoading()
     fun hideLoading()
-    fun show(user: UserDto)
+    fun show(user: OregDto)
+
 }
