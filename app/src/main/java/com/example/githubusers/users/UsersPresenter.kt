@@ -1,5 +1,6 @@
 package com.example.githubusers.users
 
+import android.annotation.SuppressLint
 import android.util.Log
 import com.example.githubusers.repository.GitUsersRepository
 import com.example.githubusers.repository.UsersGitRepositoryImpl
@@ -10,12 +11,13 @@ import moxy.MvpPresenter
 import java.util.concurrent.TimeUnit
 
 class UsersPresenter(
-    val repo: GitUsersRepository,
-    val router: Router,
+    private val repo: GitUsersRepository,
+    private val router: Router,
 
 
     ) : MvpPresenter<UsersView>() {
 
+    @SuppressLint("CheckResult")
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.showLoading()

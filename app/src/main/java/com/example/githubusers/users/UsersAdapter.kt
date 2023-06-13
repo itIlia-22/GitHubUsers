@@ -1,5 +1,6 @@
 package com.example.githubusers.users
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +13,7 @@ class UsersAdapter(
     private val onItemClick: OnItemClick,
 ) : RecyclerView.Adapter<UsersAdapter.UsersHolderView>() {
     var user: List<UserDto> = emptyList()
+        @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
             notifyDataSetChanged()

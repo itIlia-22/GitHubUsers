@@ -9,8 +9,8 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
 
 class UsersDetailsPresenter(
-    val repo: GitUsersRepository,
-    val router: Router,
+    private val repo: GitUsersRepository,
+    private val router: Router,
 
 
     ) : MvpPresenter<UsersDetailsView>() {
